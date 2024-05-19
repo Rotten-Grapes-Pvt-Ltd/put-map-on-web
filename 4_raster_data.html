@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Put basic map on web page</title>
+
+    <!-- Import leaflet CSS and JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+ integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+ crossorigin=""></script>
+
+ <!-- For GeoTIFF layer  -->
+ <script src="https://unpkg.com/georaster-layer-for-leaflet"></script>
+ <script src="https://unpkg.com/georaster"></script>
+
+ <!-- For MBTiles layer -->
+ <script src="https://unpkg.com/sql.js@0.3.2/js/sql.js"></script>
+ <script src="https://unpkg.com/Leaflet.TileLayer.MBTiles@1.0.0/Leaflet.TileLayer.MBTiles.js"></script>
+
+
+ <style>
+    /* give height to the map based on id  */
+    #map { 
+        height: 95vh; 
+    } 
+
+ </style>
+</head>
+<body>
+    
+    <!-- Create blank div in which map canvas will be created -->
+    <div id="map"></div>
+
+    <script>
+        var map = L.map('map') // `map`  is the id of the div
+        .setView(
+            [19.980336549025623,73.79112943149596],  // center ( latitude, longitude)
+            13 //zoom
+        ); 
+        // // Tile layer
+        // add a tile layer from OSM
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+
+        // // WMS layer
+        // L.tileLayer.wms("https://gs-stable.geo-solutions.it/geoserver/wms", {
+        //     layers: 'gs:ny_roads            ',
+        //     format: 'image/png',
+        //     transparent: true,
+        //     attribution: "New York Roads"
+        // }).addTo(map);
+
+        // // Image Overlay
+        // var imageUrl = 'https://maps.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
+        // imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
+        // L.imageOverlay(imageUrl, imageBounds).addTo(map);   
+
+        // // GeoTIFF
+        // var url_to_geotiff_file = "./data/satellite.tif";
+
+        // fetch(url_to_geotiff_file)
+        // .then(response => response.arrayBuffer())
+        // .then(arrayBuffer => {
+        //     parseGeoraster(arrayBuffer).then(georaster => {
+        //     console.log("georaster:", georaster);
+        //     var layer = new GeoRasterLayer({
+        //         georaster: georaster,
+        //         opacity: 1,
+        //         resolution:300 
+        //     });
+        //     layer.addTo(map);
+
+        //     map.fitBounds(layer.getBounds());
+
+        // });
+        // });
+
+        // // MBTiles
+        // var mb = L.tileLayer.mbTiles('./data/countries-raster.mbtiles', {
+        //     minZoom: 0,
+        //     maxZoom: 16
+        // }).addTo(map);
+
+        // mb.on('databaseloaded', function(ev) {
+        //     console.info('MBTiles DB loaded', ev);
+        // });
+        // mb.on('databaseerror', function(ev) {
+        //     console.info('MBTiles DB error', ev);
+        // });
+
+    </script>   
+
+</body>
+</html>
